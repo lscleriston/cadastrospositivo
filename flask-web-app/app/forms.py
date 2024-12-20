@@ -2,30 +2,26 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, FileField, SelectField, SelectMultipleField
 from wtforms.validators import DataRequired, Optional
 import pandas as pd
-import os
-
-# Obter o diretório base do projeto
-base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 # Carregar a lista de certificações a partir do arquivo Excel
 try:
-    certifications_df = pd.read_excel(os.path.join(base_dir, 'data', 'certificacao.xlsx'))
+    certifications_df = pd.read_excel('data/certificacao.xlsx')
     certifications = [('', 'Selecione uma certificação')] + [(row['Certificacao'], row['Certificacao']) for index, row in certifications_df.iterrows()]
-except KeyError:
+except FileNotFoundError:
     certifications = [('', 'Selecione uma certificação')]
 
 # Carregar a lista de torres de atendimento a partir do arquivo Excel
 try:
-    torres_df = pd.read_excel(os.path.join(base_dir, 'data', 'torre.xlsx'))
+    torres_df = pd.read_excel('data/torre.xlsx')
     torres = [(row['Torre'], row['Torre']) for index, row in torres_df.iterrows()]
-except KeyError:
+except FileNotFoundError:
     torres = []
 
 # Carregar a lista de operações a partir do arquivo Excel
 try:
-    operacoes_df = pd.read_excel(os.path.join(base_dir, 'data', 'Relacao de Clientes.xlsx'))
+    operacoes_df = pd.read_excel('data/Relacao de Clientes.xlsx')
     operacoes = [(row['Operacao'], row['Operacao']) for index, row in operacoes_df.iterrows()]
-except KeyError:
+except FileNotFoundError:
     operacoes = []
 
 class LoginForm(FlaskForm):
