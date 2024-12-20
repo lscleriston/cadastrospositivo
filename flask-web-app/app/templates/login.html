@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .banner {
+            width: 100%;
+            max-width: 1136px;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: calc(100vh - 720px); /* Altura da tela menos a altura do banner */
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <img src="{{ url_for('static', filename='capa-linkedin-colaborador.png') }}" class="img-fluid banner" alt="Banner">
+    </div>
+    <div class="container login-container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center">Login</h1>
+                <form method="POST" action="{{ url_for('login') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.matricula.label(class="form-label") }}
+                        {{ form.matricula(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class="form-label") }}
+                        {{ form.password(class="form-control") }}
+                    </div>
+                    <div class="form-group text-center">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+                <p class="text-center">Não tem uma conta? <a href="{{ url_for('register') }}">Cadastre-se</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
