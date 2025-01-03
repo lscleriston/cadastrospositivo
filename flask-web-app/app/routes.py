@@ -176,5 +176,17 @@ def delete_file(filename):
         writer = csv.writer(file)
         writer.writerows(rows)
 
+    # Remover a entrada do arquivo do user_file_graduacao.csv
+    rows = []
+    with open('user_file_graduacao.csv', mode='r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if len(row) >= 3 and (row[0] != user['matricula'] or row[1] != filename):
+                rows.append(row)
+
+    with open('user_file_graduacao.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(rows)
+
     flash('Arquivo excluído com sucesso!', 'success')
     return redirect(url_for('user_form'))
